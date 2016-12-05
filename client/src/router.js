@@ -6,7 +6,7 @@ import Signup from './components/Signup'
 
 import auth from './auth'
 
-const requireAuth =  (to, _from, next) => {
+const requireAuth = (to, _from, next) => {
   if(!auth.user.authenticated) {
     next({
       path: '/login',

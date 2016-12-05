@@ -21,9 +21,7 @@ import giphy from '../giphy'
 
 export default {
 
-  name: 'Hello',
-
-  data() {
+  data: () => {
     return {
       user: {},
       image: '',
@@ -55,40 +53,34 @@ export default {
 }
 </script>
 <style scoped>
-  .hello-view {
-    max-width: 500px;
-    margin: 50px auto 0 auto;
-  }
-
-  .hello-view .home-logout-message {
-    font-size: 15px;
-  }
-
-  .welcome-gif {
-    max-height: 340px;
-    max-width: 450px;
-  }
-
-  .horizontal {
-    display: flex;
-    justify-content: center;
-    min-height: 350px;
-  }
-
-  .vertical {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-
-  .giphy-form {
-    width: 400px;
-    margin: 0 auto 35px auto;
-  }
-
-  .giphy-form input {
-    font-size: 17px;
-    letter-spacing: 1px;
-    height: 52px;
-  }
+.hello-view {
+  max-width: 500px;
+  margin: 50px auto 0 auto;
+}
+.hello-view .home-logout-message {
+  font-size: 15px;
+}
+.welcome-gif {
+  max-height: 340px;
+  max-width: 450px;
+}
+.horizontal {
+  display: flex;
+  justify-content: center;
+  min-height: 350px;
+}
+.vertical {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.giphy-form {
+  width: 400px;
+  margin: 0 auto 35px auto;
+}
+.giphy-form input {
+  font-size: 17px;
+  letter-spacing: 1px;
+  height: 52px;
+}
 </style>

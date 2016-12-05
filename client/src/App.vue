@@ -8,12 +8,15 @@
 import auth from './auth'
 
 export default {
+
   name: 'App',
+
   data: () => {
     return {
       user: auth.user
     }
   },
+
   methods: {
     logout(){
       auth.logout(this, { headers: auth.getAuthHeader() })
@@ -84,8 +87,6 @@ export default {
   color: #4CAF50;
   text-decoration: none;
 }
-
-
 body {
   background: #76b852; /* fallback for old browsers */
   background: -webkit-linear-gradient(right, #76b852, #8DC26F);

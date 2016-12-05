@@ -10,13 +10,13 @@
           placeholder="Enter your username"
           v-model="credentials.username"
         >
-        <p class="field-message" v-if="errorFields.username">{{ errorFields.username }}</p>
+        <p class="field-message" v-if="errors.username">{{ errors.username }}</p>
         <input
           type="password"
           placeholder="Enter your password"
           v-model="credentials.password"
         >
-        <p class="field-message" v-if="errorFields.password">{{ errorFields.password }}</p>
+        <p class="field-message" v-if="errors.password">{{ errors.password }}</p>
         <p v-if="error" class="error-message">{{ error }}</p>
         <button type="submit">Login</button>
         <p class="message">Not registered? <router-link to="signup">Create an account</router-link></p>
@@ -37,10 +37,7 @@ export default {
         password: ''
       },
       error: '',
-      errorFields: {
-        username: '',
-        password: ''
-      }
+      errors: Object.assign({}, this.credentials)
     }
   },
 
@@ -56,7 +53,7 @@ export default {
 
       if(this.credentials.username && this.credentials.password){
         auth.login(this, {session: credentials}, '/')
-        this.errorFields = { username: "", password: "" }
+        this.errors = { username: "", password: "" }
       }
     },
 
@@ -65,7 +62,7 @@ export default {
       this.error = ""
 
       if(!this.credentials.username && !this.credentials.password){
-        this.errorFields = {
+        this.errors = {
           username: "can't be blank",
           password: "can't be blank",
         }
@@ -73,7 +70,7 @@ export default {
       }
 
       if(!this.credentials.username){
-        this.errorFields = {
+        this.errors = {
           username: "can't be blank",
           password: ""
         }
@@ -81,7 +78,7 @@ export default {
       }
 
       if(!this.credentials.password){
-        this.errorFields = {
+        this.errors = {
           username: "",
           password: "can't be blank"
         }
