@@ -8,7 +8,7 @@
     <meta name="author" content="">
 
     <title>BasicApp!</title>
-    <link rel="stylesheet" href="<%= static_path(@conn, "/css/application.css") %>">
+    <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
   </head>
     <div id="app"></div>
     <script src="<%= static_path(@conn, "/js/manifest.js") %>"></script>

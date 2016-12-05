@@ -6,7 +6,7 @@
   "private": true,
   "scripts": {
     "dev": "node build/dev-server.js",
-    "build": "node build/build.js && cp dist/static/js/*.js dist/static/js/*.map ../server/priv/static/js/. && cp dist/static/css/app.css ../server/priv/static/css/application.css",
+    "build": "node build/build.js && cp dist/static/js/*.js dist/static/js/*.map ../server/priv/static/js/. && cp dist/static/css/app.css dist/static/css/app.css.map ../server/priv/static/css/.",
     "lint": "eslint --ext .js,.vue src"
   },
   "dependencies": {
