@@ -1,8 +1,10 @@
-# Basic Authentication Example Built With Phoenix, Vue.js 2.0 and PostgreSQL
+# Basic Authentication Example Built With Phoenix, Vue 2.0 and Vue Router 2.0
+
+****Sorry for not having the commit history of this project, at the beginning I didn't realize that I was going to upload it to Github***
 
 To start this application locally:
 
-* Make sure you have installed Elixir, Erlang, Phoenix, Node and PostgreSQL
+* Make sure you have installed _Elixir_, _Erlang_, _Phoenix_, _Node_ and _PostgreSQL_
 * Install the Mix dependencies: `$ cd server/ && mix deps.get`
 * Create, migrate and seed the development database: `$ mix ecto.setup`
 * Start the Phoenix Server: `$ mix phoenix.server` or `$ iex -S mix phoenix.server`
