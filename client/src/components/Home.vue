@@ -43,26 +43,22 @@ export default {
     },
 
     logout(){
-      this.query = "bye"
-      this.searchGIF()
-      setTimeout(() => {
-        auth.logout(this, { headers: auth.getAuthHeader() })
-      }, 3000);
+      auth.logout(this, { headers: auth.getAuthHeader() })
     }
   }
 }
 </script>
 <style scoped>
 .hello-view {
-  max-width: 500px;
+  max-width: 400px;
   margin: 50px auto 0 auto;
 }
 .hello-view .home-logout-message {
   font-size: 15px;
 }
 .welcome-gif {
-  max-height: 340px;
-  max-width: 450px;
+  max-width: 100%;
+  max-height: 100%;
 }
 .horizontal {
   display: flex;
@@ -75,12 +71,21 @@ export default {
   justify-content: center;
 }
 .giphy-form {
-  width: 400px;
+  max-width: 400px;
   margin: 0 auto 35px auto;
 }
 .giphy-form input {
   font-size: 17px;
   letter-spacing: 1px;
   height: 52px;
+}
+@media only screen
+  and (min-device-width: 320px)
+  and (max-device-width: 410px)
+  and (-webkit-min-device-pixel-ratio: 2)
+  and (orientation: portrait) {
+    .horizontal {
+      min-height: 200px;
+    }
 }
 </style>

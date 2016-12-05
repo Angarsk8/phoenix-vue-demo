@@ -28,7 +28,7 @@ export default {
 @import url(https://fonts.googleapis.com/css?family=Roboto:300);
 
 .login-page {
-  width: 360px;
+  max-width: 360px;
   padding: 10% 0 0;
   margin: auto;
 }
