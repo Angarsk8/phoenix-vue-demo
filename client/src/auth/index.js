@@ -2,8 +2,8 @@ import { router } from '../router'
 
 const { SCHEME, HOSTNAME } =
   process.env.NODE_ENV == 'production'
-  ? {SCHEME: "https", HOSTNAME: window.location.hostname}
-  : {SCHEME: "http" , HOSTNAME: "localhost:4000"}
+  ? {SCHEME: 'https', HOSTNAME: window.location.hostname}
+  : {SCHEME: 'http' , HOSTNAME: 'localhost:4000'}
 
 const API_URL          = `${SCHEME}://${HOSTNAME}/api`
 const REGISTRATION_URL = `${API_URL}/registrations/`
@@ -13,17 +13,17 @@ const CURRENT_USER_URL = `${API_URL}/current_user/`
 export default {
 
   user: {
-    authenticated: localStorage.getItem("id_token") ? true : false
+    authenticated: window.localStorage.getItem('id_token') ? true : false
   },
 
-  login(context, creds, redirect) {
+  login (context, creds, redirect) {
     context.$http.post(SESSION_URL, creds)
       .then(resp => {
-        localStorage.setItem('id_token', resp.body.jwt)
+        window.localStorage.setItem('id_token', resp.body.jwt)
 
         this.user.authenticated = true
 
-        if(redirect) {
+        if (redirect) {
           router.push({path: redirect})
         }
       }, resp => {
@@ -31,23 +31,23 @@ export default {
       })
   },
 
-  currentUser(context) {
+  currentUser (context) {
     context.$http.get(CURRENT_USER_URL, {headers: this.getAuthHeader()})
       .then(resp => {
-          context.user = resp.body.user
-        }, error => {
-          console.log(error)
-        })
+        context.user = resp.body.user
+      }, error => {
+        console.log(error)
+      })
   },
 
-  signup(context, creds, redirect) {
+  signup (context, creds, redirect) {
     context.$http.post(REGISTRATION_URL, creds)
       .then(resp => {
-        localStorage.setItem('id_token', resp.body.jwt)
+        window.localStorage.setItem('id_token', resp.body.jwt)
 
         this.user.authenticated = true
 
-        if(redirect) {
+        if (redirect) {
           router.push({path: redirect})
         }
       }, resp => {
@@ -56,25 +56,25 @@ export default {
       })
   },
 
-  logout(context, options) {
+  logout (context, options) {
     context.$http.delete(SESSION_URL, options)
       .then(data => {
-        localStorage.removeItem('id_token')
+        window.localStorage.removeItem('id_token')
         this.user.authenticated = false
-        router.push({path: "/login"})
+        router.push({path: '/login'})
       }, error => {
         console.log(error.message)
       })
-    },
+  },
 
-  checkAuth() {
-    const jwt = localStorage.getItem('id_token')
+  checkAuth () {
+    const jwt = window.localStorage.getItem('id_token')
     this.user.authenticated = jwt ? true : false
   },
 
-  getAuthHeader() {
+  getAuthHeader () {
     return {
-      'Authorization': localStorage.getItem('id_token')
+      'Authorization': window.localStorage.getItem('id_token')
     }
   }
 }

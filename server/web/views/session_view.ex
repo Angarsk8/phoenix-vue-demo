@@ -8,10 +8,6 @@ defmodule BasicApp.SessionView do
     }
   end
 
-  def render("blank.json", _) do
-    %{message: "Invalid email or password"}
-  end
-
   def render("error.json", _) do
     %{message: "Invalid email or password"}
   end
