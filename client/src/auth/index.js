@@ -1,19 +1,16 @@
-import { router } from '../router'
-
 const { SCHEME, HOSTNAME } =
-  process.env.NODE_ENV == 'production'
+  process.env.NODE_ENV === 'production'
   ? {SCHEME: 'https', HOSTNAME: window.location.hostname}
-  : {SCHEME: 'http' , HOSTNAME: 'localhost:4000'}
+  : {SCHEME: 'http', HOSTNAME: 'localhost:4000'}
 
-const API_URL          = `${SCHEME}://${HOSTNAME}/api`
+const API_URL = `${SCHEME}://${HOSTNAME}/api`
 const REGISTRATION_URL = `${API_URL}/registrations/`
-const SESSION_URL      = `${API_URL}/sessions/`
+const SESSION_URL = `${API_URL}/sessions/`
 const CURRENT_USER_URL = `${API_URL}/current_user/`
 
 export default {
-
   user: {
-    authenticated: window.localStorage.getItem('id_token') ? true : false
+    authenticated: !!window.localStorage.getItem('id_token')
   },
 
   login (context, creds, redirect) {
@@ -24,7 +21,7 @@ export default {
         this.user.authenticated = true
 
         if (redirect) {
-          router.push({path: redirect})
+          context.$router.push({path: redirect})
         }
       }, resp => {
         context.error = resp.body.message
@@ -35,8 +32,13 @@ export default {
     context.$http.get(CURRENT_USER_URL, {headers: this.getAuthHeader()})
       .then(resp => {
         context.user = resp.body.user
-      }, error => {
-        console.log(error)
+      }, _ => {
+        window.localStorage.removeItem('id_token')
+        this.user.authenticated = false
+        context.$router.push({
+          path: '/login',
+          query: {redirect: context.$route.fullPath}
+        })
       })
   },
 
@@ -44,11 +46,10 @@ export default {
     context.$http.post(REGISTRATION_URL, creds)
       .then(resp => {
         window.localStorage.setItem('id_token', resp.body.jwt)
-
         this.user.authenticated = true
 
         if (redirect) {
-          router.push({path: redirect})
+          context.$router.push({path: redirect})
         }
       }, resp => {
         console.log(resp.body.errors)
@@ -61,7 +62,7 @@ export default {
       .then(data => {
         window.localStorage.removeItem('id_token')
         this.user.authenticated = false
-        router.push({path: '/login'})
+        context.$router.push({path: '/login'})
       }, error => {
         console.log(error.message)
       })
@@ -69,7 +70,7 @@ export default {
 
   checkAuth () {
     const jwt = window.localStorage.getItem('id_token')
-    this.user.authenticated = jwt ? true : false
+    this.user.authenticated = !!jwt
   },
 
   getAuthHeader () {

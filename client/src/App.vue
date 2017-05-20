@@ -8,7 +8,6 @@
 import auth from './auth'
 
 export default {
-
   name: 'App',
 
   data: () => {

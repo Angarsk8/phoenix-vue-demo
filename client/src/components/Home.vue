@@ -20,7 +20,6 @@ import auth from '../auth'
 import giphy from '../giphy'
 
 export default {
-
   data: () => {
     return {
       user: {},

@@ -19,7 +19,10 @@
         <p class="field-message" v-if="errors.password">{{ errors.password }}</p>
         <p v-if="error" class="error-message">{{ error }}</p>
         <button type="submit">Login</button>
-        <p class="message">Not registered? <router-link to="signup">Create an account</router-link></p>
+        <p class="message">
+          Not registered?
+          <router-link to="signup">Create an account</router-link>
+        </p>
       </form>
     </div>
   </div>
@@ -29,7 +32,6 @@
 import auth from '../auth'
 
 export default {
-
   data() {
     return {
       credentials: {
@@ -43,7 +45,6 @@ export default {
 
   methods: {
     login() {
-
       this._validateLoginForm()
 
       const credentials = {
@@ -58,7 +59,6 @@ export default {
     },
 
     _validateLoginForm() {
-
       this.error = ""
 
       if(!this.credentials.username && !this.credentials.password){
